@@ -8,7 +8,7 @@ public class name extends className
 ```
 
 - Alt + Insert = Generate getter and setter
-- Listung
+- Static bezieht sich auf all varianten
 - `befehle`
 
 - [x] Erledigt

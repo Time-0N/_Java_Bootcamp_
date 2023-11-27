@@ -5,12 +5,6 @@ public class Vehicle {
     private String model;
     private int constructionYear;
 
-    public void vehicleInformation() {
-        System.out.println("Manufacturer: " + manufacturer);
-        System.out.println("Model: " + model);
-        System.out.println("Construction Year: " + constructionYear);
-    }
-
     public String getManufacturer() {
         return manufacturer;
     }
@@ -33,5 +27,12 @@ public class Vehicle {
 
     public void setConstructionYear(int constructionYear) {
         this.constructionYear = constructionYear;
+    }
+
+    public void vehicleInformation() {
+        System.out.println("");
+        System.out.println("Manufacturer: " + manufacturer);
+        System.out.println("Model: " + model);
+        System.out.println("Construction Year: " + constructionYear);
     }
 }
