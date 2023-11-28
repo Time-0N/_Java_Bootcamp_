@@ -1,6 +1,6 @@
-# Titel
-## Zweite Überschrift
-### Dritte Überschrift
+# Interface
+## 
+### 
 
 ```
 //code notes go here:
@@ -21,11 +21,10 @@ something.setHifi(true);
 ```
 
 - Interface Methoden sind automatisch public
-- Listung
 - ``
 
-- [x] Erledigt
-- [ ] Offen
+- [x]
+- [ ] 
 
 
 ### Bilder

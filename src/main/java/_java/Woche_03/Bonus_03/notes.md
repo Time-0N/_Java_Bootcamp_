@@ -3,19 +3,16 @@
 ### Dritte Überschrift
 
 ```
-//Vererbung:
-public class name extends className
-
-//Methoden überschreiben
-super.methodname();
+//code notes go here:
+System.out.println("HelloWorld");
 ```
 
-- Alt + Insert = Generate getter and setter
-- Static bezieht sich auf all varianten
-- ``
+- Auf
+- Listung
+- `befehle`
 
-- [x]
-- [ ]
+- [x] Erledigt
+- [ ] Offen
 
 
 ### Bilder
