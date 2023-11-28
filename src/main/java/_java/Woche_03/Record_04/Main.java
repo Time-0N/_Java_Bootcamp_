@@ -21,6 +21,7 @@ public class Main {
         Teacher teacher01 = new Teacher("Walter", 52, "Meth");
         Teacher teacher02 = teacher01.withSubject("Chemistry");
 
+        Course meth = new Course(190, "Meth");
 
     }
 }
