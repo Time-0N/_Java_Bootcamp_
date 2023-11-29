@@ -1,12 +1,14 @@
 package _java.Woche_03.Record_04;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.With;
 
 @Getter
 @Setter
-@RequiredArgsConstructor
-@Builder
 @With
+@Builder
 public class Student {
     private int age;
     private String name;
