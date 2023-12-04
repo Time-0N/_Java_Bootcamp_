@@ -2,10 +2,12 @@ package _java.Woche_03.Bonus_07;
 
 public class Main {
 
+
+    //coded by Time_ON aka the MasterBaiter
     private static void printSudoku(int[][] sudokuBoard) {
-        for (int rowV = 0; rowV < sudokuBoard.length; rowV++) {
+        for (int[] ints : sudokuBoard) {
             for (int rowH = 0; rowH < sudokuBoard.length; rowH++) {
-                System.out.print(" " + sudokuBoard[rowV][rowH] + " ");
+                System.out.print(" " + ints[rowH] + " ");
                 if (rowH == 2 || rowH == 5) {
                     System.out.print("|");
                 }
@@ -36,25 +38,38 @@ public class Main {
     }
 
     private static boolean isValid(int[][] sudokuBoard, int rowV, int rowH, int num) {
-        return !checkRowV(sudokuBoard, rowH, num) && !checkRowH(sudokuBoard, rowV, num);
+        return checkRowV(sudokuBoard, rowH, num) && checkRowH(sudokuBoard, rowV, num) && checkBox(sudokuBoard, rowV, rowH, num);
     }
 
     private static boolean checkRowV(int[][] sudokuBoard, int rowH, int num) {
         for (int rowV = 0; rowV <= 8; rowV++) {
             if (sudokuBoard[rowV][rowH] == num) {
-                return true;
+                return false;
             }
         }
-        return false;
+        return true;
     }
 
     private static boolean checkRowH(int[][] sudokuBoard, int rowV, int num) {
         for (int rowH = 0; rowH <= 8; rowH++) {
             if (sudokuBoard[rowV][rowH] == num) {
-                return true;
+                return false;
             }
         }
-        return false;
+        return true;
+    }
+
+    private static boolean checkBox(int[][] sudokuBoard, int rowV, int rowH, int num) {
+        int boxV = rowV - rowV % 3;
+        int boxH = rowH - rowH % 3;
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (sudokuBoard[i + boxV][j + boxH] == num) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
 
