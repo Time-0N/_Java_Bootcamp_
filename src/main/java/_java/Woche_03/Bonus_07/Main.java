@@ -1,9 +1,85 @@
 package _java.Woche_03.Bonus_07;
 
+import java.util.Random;
+import java.util.Scanner;
+
 public class Main {
 
 
     //coded by Time_ON aka the MasterBaiter
+    private static int[][] generateRandomSudoku() {
+        Random random = new Random();
+
+        int randomNumber;
+        int[][] randomSudoku = new int[9][9];
+
+        do {
+            randomNumber = random.nextInt(9 - 1 + 1) + 1;
+
+            for (int i = 0; i < 9; i++) {
+                for (int j = 0; j < 9; j++) {
+                    if (isValid(randomSudoku, i, j, randomNumber)) {
+                        randomSudoku[i][j] = randomNumber;
+                    }
+
+                }
+            }
+        } while (!solveSudoku(randomSudoku));
+        return randomSudoku;
+    }
+
+    private static int[][] sudokuDifficulty(int[][] randomSudoku, double actualDifficulty, int difficulty) {
+        Random random = new Random();
+
+
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                if (random.nextDouble() > actualDifficulty) {
+                    randomSudoku[i][j] = 0;
+                }
+                if (!checkBoxForZero(randomSudoku, i, j, difficulty)) {
+                    randomSudoku[(random.nextInt(8 - 1 + 1) + 1)][(random.nextInt(8 - 1 + 1) + 1)] = 0;
+                }
+            }
+        }
+        return randomSudoku;
+    }
+
+    private static boolean checkBoxForZero(int[][] sudokuBoard, int rowV, int rowH, int difficulty) {
+        int detectedZero = 0;
+
+        int boxV = rowV - rowV % 3;
+        int boxH = rowH - rowH % 3;
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (sudokuBoard[i + boxV][j + boxH] == 0) {
+                    detectedZero++;
+                }
+            }
+        }
+        return switch (difficulty) {
+            case 1 -> {
+                if (detectedZero > 2) {
+                    yield true;
+                }
+                yield false;
+            }
+            case 2 -> {
+                if (detectedZero > 4) {
+                    yield true;
+                }
+                yield false;
+            }
+            case 3 -> {
+                if (detectedZero > 6) {
+                    yield true;
+                }
+                yield false;
+            }
+            default -> true;
+        };
+    }
+
     private static void printSudoku(int[][] sudokuBoard) {
         for (int[] ints : sudokuBoard) {
             for (int rowH = 0; rowH < sudokuBoard.length; rowH++) {
@@ -74,24 +150,37 @@ public class Main {
 
 
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
 
-        int[][] sudokuBoard = {
-                {9, 0, 0, 7, 0, 4, 6, 0, 1},
-                {0, 0, 0, 0, 0, 9, 0, 2, 0},
-                {0, 0, 0, 0, 0, 0, 0, 5, 7},
-                {0, 0, 5, 0, 9, 0, 0, 6, 0},
-                {0, 0, 0, 4, 0, 7, 0, 0, 0},
-                {0, 9, 0, 0, 3, 0, 4, 0, 0},
-                {3, 2, 0, 0, 0, 0, 0, 0, 0},
-                {0, 6, 0, 2, 0, 0, 0, 0, 0},
-                {1, 0, 8, 3, 0, 5, 0, 0, 2}
-        };
+        int[][] sudoku;
+        int difficulty;
+        double actualDifficulty = 0;
 
-        if (solveSudoku(sudokuBoard)) {
-            printSudoku(sudokuBoard);
-        } else {
-            System.out.println("Sudoku is not solvable");
+        while (true) {
+            System.out.println("Select difficulty 1-3");
+            difficulty = sc.nextInt();
+            if (difficulty > 0 && difficulty < 4) {
+                break;
+            } else {
+                System.out.println("Inavlid difficulty");
+            }
         }
 
+        switch (difficulty) {
+            case 1:
+                actualDifficulty = 0.5;
+                break;
+            case 2:
+                actualDifficulty = 0.3;
+                break;
+            case 3:
+                actualDifficulty = 0.2;
+                break;
+        }
+
+        sudoku = generateRandomSudoku();
+        sudoku = sudokuDifficulty(sudoku, actualDifficulty, difficulty);
+
+        printSudoku(sudoku);
     }
 }
